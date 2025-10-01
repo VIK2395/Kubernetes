@@ -1,0 +1,2 @@
+- SA (Service Account) = who you are.
+- RBAC (Role-Based Access Control) = what you can do.
