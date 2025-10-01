@@ -97,6 +97,8 @@ Storages
 
 5. **Local Persistent Volumes**:
    - A more advanced and persistent form of local storage.
+   - **Uses a physical disk or directory on a specific node**
+   - **Tied to host machine**
    - Unlike `emptyDir` or `hostPath`, it integrates with Kubernetes' Persistent Volume (PV) and Persistent Volume Claim (PVC) system.
    - It provides higher durability and is suitable for stateful workloads like databases.
 
@@ -137,6 +139,24 @@ Storages
        requests:
          storage: 10Gi
      storageClassName: local-storage
+   ```
+
+6. **Remote Persistent Volumes**
+   - Volume is network-attached storage (remote) — it isn’t physically on the node disk.
+   - It can be detached/reattached to different nodes (but only one at a time, because ReadWriteOnce).
+
+   ```yaml
+   apiVersion: v1
+   kind: PersistentVolumeClaim
+   metadata:
+      name: logstash-data
+   spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+         requests:
+             storage: 1Gi
+      storageClassName: gp2
    ```
 
 ---
